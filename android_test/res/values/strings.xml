@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">android_test</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="contact">联系人</string>
+    <string name="button2">按钮2 待开发</string>
+    <string name="button3">按钮3 待开发</string>
+    <string name="button4">按钮4 待开发</string>
+    
+    <string name="sms_btn">发送短信</string>
+</resources>
