@@ -1,8 +1,10 @@
 package com.example.android_test;
 
 import com.example.android_test.sys.Contact;
+import com.example.android_test.sys.PhotoAlbum;
 
 import android.os.Bundle;
+import android.provider.Contacts.Photos;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -18,6 +20,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//联系人列表
 		Button button1 = (Button) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {
 			@Override
@@ -28,9 +31,19 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		
+		//相册
 		Button button2 = (Button) findViewById(R.id.button2);
 		button2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, PhotoAlbum.class);
+				startActivity(intent);
+			}
+		});
+		
+		Button button3 = (Button) findViewById(R.id.button3);
+		button3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getApplicationContext(), 
