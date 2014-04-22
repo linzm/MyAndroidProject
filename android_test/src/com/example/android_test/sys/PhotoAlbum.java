@@ -3,9 +3,13 @@ package com.example.android_test.sys;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.example.android_test.R;
+import com.example.android_test.adapter.GroupAdapter;
+import com.example.android_test.bean.ImageBean;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -25,9 +29,10 @@ import android.widget.GridView;
 public class PhotoAlbum extends Activity {
 
 	private HashMap<String, List<String>> mGroupMap = new HashMap<String, List<String>>();
+	private List<ImageBean> list = new ArrayList<ImageBean>();
 	private final static int SCAN_OK = 1;
 	private ProgressDialog progressDialog;
-//	private GroupAdapter groupAdapter;
+	private GroupAdapter adapter;
 	private GridView mGridView;
 	
 	private Handler mHandler = new Handler(){
@@ -40,7 +45,9 @@ public class PhotoAlbum extends Activity {
 				progressDialog.dismiss();
 				
 				//创建适配器
-				
+				adapter = new GroupAdapter(PhotoAlbum.this, 
+						list = subGroupOfImage(mGroupMap), mGridView);
+				mGridView.setAdapter(adapter);
 				break;
 			}
 		}
@@ -110,6 +117,31 @@ public class PhotoAlbum extends Activity {
 				
 			}
 		}).start();
+		
+	}
+
+	private List<ImageBean> subGroupOfImage(HashMap<String,List<String>> mGroupMap){
+		
+		if(mGroupMap.size() == 0){
+			return null;
+		}
+		
+		List<ImageBean> list = new ArrayList<ImageBean>();
+		Iterator<Map.Entry<String, List<String>>> it = mGroupMap.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry<String, List<String>> entry = it.next();
+			ImageBean imageBean = new ImageBean();
+			String key = entry.getKey();
+			List<String> value = entry.getValue();
+			
+			imageBean.setFolderName(key);
+			imageBean.setImageCounts(value.size());
+			imageBean.setTopImagePath(value.get(0));
+			
+			list.add(imageBean);
+		}
+		
+		return list;
 		
 	}
 }
