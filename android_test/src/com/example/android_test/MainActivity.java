@@ -4,7 +4,6 @@ import com.example.android_test.sys.Contact;
 import com.example.android_test.sys.PhotoAlbum;
 
 import android.os.Bundle;
-import android.provider.Contacts.Photos;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;

@@ -1,9 +1,12 @@
 package com.example.android_test.adapter;
 
+import java.security.spec.MGF1ParameterSpec;
 import java.util.List;
 
 import com.example.android_test.R;
 import com.example.android_test.bean.ImageBean;
+import com.example.android_test.util.NativeImageLoader;
+import com.example.android_test.util.NativeImageLoader.NativeImageCallBack;
 import com.example.android_test.view.MyImageView;
 import com.example.android_test.view.MyImageView.OnMeasureListener;
 
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GroupAdapter extends BaseAdapter {
@@ -57,8 +61,8 @@ public class GroupAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.album_item, null);
 			
 			viewHolder.myImageView = (MyImageView) convertView.findViewById(R.id.group_images);
-			viewHolder.mTextViewTitle = (TextView) convertView.findViewById(R.id.group_title);
 			viewHolder.mTextViewCounts = (TextView) convertView.findViewById(R.id.group_count);
+			viewHolder.mTextViewTitle = (TextView) convertView.findViewById(R.id.group_title);
 			
 			viewHolder.myImageView.setOnMeasureListener(new OnMeasureListener() {
 				
@@ -77,10 +81,21 @@ public class GroupAdapter extends BaseAdapter {
 		}
 		
 		viewHolder.mTextViewTitle.setText(imageBean.getFolderName());
-		viewHolder.mTextViewCounts.setText(imageBean.getImageCounts());
+		viewHolder.mTextViewCounts.setText(Integer.toString(imageBean.getImageCounts()));
 		viewHolder.myImageView.setTag(path);
 		
-		Bitmap bmap = null;
+		//利用NativeImageLoader类加载本地图片  
+		Bitmap bmap = NativeImageLoader.getInstance().loadNativeImage(path, point, 
+				new NativeImageCallBack() {
+					
+			@Override
+			public void onImageLoad(Bitmap bitmap, String path) {
+				ImageView imageView = (ImageView) gridView.findViewWithTag(path);
+				if(bitmap != null && imageView != null){
+					imageView.setImageBitmap(bitmap);
+				}
+			}
+		});
 		
 		if(bmap != null){
 			viewHolder.myImageView.setImageBitmap(bmap);

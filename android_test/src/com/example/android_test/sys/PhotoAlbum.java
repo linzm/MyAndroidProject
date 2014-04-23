@@ -19,9 +19,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.MediaStore.MediaColumns;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -85,11 +85,11 @@ public class PhotoAlbum extends Activity {
 				Uri imageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 				ContentResolver resolver = PhotoAlbum.this.getContentResolver();
 				
-				String selection = MediaStore.Images.Media.MIME_TYPE + "=? or "+
-						MediaStore.Images.Media.MIME_TYPE + "=?";
+				String selection = MediaColumns.MIME_TYPE + "=? or "+
+						MediaColumns.MIME_TYPE + "=?";
 				Cursor mcursor = resolver.query(imageUri, null, selection, 
 						new String[]{"image/jpeg","image/png"}, 
-						MediaStore.Images.Media.DATE_MODIFIED);
+						MediaColumns.DATE_MODIFIED);
 				
 				if(mcursor == null)
 					return;
@@ -97,7 +97,7 @@ public class PhotoAlbum extends Activity {
 				while (mcursor.moveToNext()) {
 					//获取图片路径
 					String path = mcursor.getString(mcursor.
-							getColumnIndex(MediaStore.Images.Media.DATA	));
+							getColumnIndex(MediaColumns.DATA));
 					//父路径名
 					String parentName = new File(path).getParentFile().getName();
 					

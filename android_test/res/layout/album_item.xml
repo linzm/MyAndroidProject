@@ -12,6 +12,11 @@
             android:id="@+id/group_images"
             android:background="@drawable/albums_bg"
             android:src="@drawable/friends_sends_pictures_no"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:paddingTop="18dip"
+            android:paddingBottom="30dip"
+            android:scaleType="fitXY"
             android:layout_width="fill_parent"
             android:layout_height="150dip"
             />
@@ -22,7 +27,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/albums_icon_bg"
             android:gravity="center"
-            
+            android:layout_marginBottom="12dip"
+            android:text="5"
+            android:layout_gravity="bottom|center_horizontal"
             />
     </FrameLayout>
     
@@ -31,7 +38,10 @@
         android:layout_width="fill_parent"  
         android:layout_height="wrap_content"
         android:layout_below="@id/frameLayout"
-        
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
         />
 
 </RelativeLayout>
