@@ -1,14 +1,6 @@
 package com.example.android_test.adapter;
 
-import java.security.spec.MGF1ParameterSpec;
 import java.util.List;
-
-import com.example.android_test.R;
-import com.example.android_test.bean.ImageBean;
-import com.example.android_test.util.NativeImageLoader;
-import com.example.android_test.util.NativeImageLoader.NativeImageCallBack;
-import com.example.android_test.view.MyImageView;
-import com.example.android_test.view.MyImageView.OnMeasureListener;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,6 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android_test.R;
+import com.example.android_test.bean.ImageBean;
+import com.example.android_test.util.NativeImageLoader;
+import com.example.android_test.util.NativeImageLoader.NativeImageCallBack;
+import com.example.android_test.view.MyImageView;
+import com.example.android_test.view.MyImageView.OnMeasureListener;
 
 public class GroupAdapter extends BaseAdapter {
 

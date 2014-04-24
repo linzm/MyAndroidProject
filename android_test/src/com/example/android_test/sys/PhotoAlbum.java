@@ -14,6 +14,7 @@ import com.example.android_test.bean.ImageBean;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,8 +68,13 @@ public class PhotoAlbum extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(), 
-						"1", Toast.LENGTH_SHORT).show();
+				
+				List<String> childList = mGroupMap.get(list.get(position).getFolderName());
+				
+				Intent intent = new Intent(PhotoAlbum.this,ShowImageActivity.class);
+				intent.putStringArrayListExtra("data", (ArrayList<String>) childList);
+				
+				startActivity(intent);
 			}
 		});
 	}
